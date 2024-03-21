@@ -1,8 +1,8 @@
-# Uniceros
+# Unicornis
 
 ## Description
 
-uniceros is a simple and lightweight application that allows you to create and manage unicorns in a store.
+unicornis is a simple and lightweight RESTful API that allows you to create and manage unicorns in a store.
 
 ## Installation
 

@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
+import logger from './utils/winston';
 
 import dbconnect from './repositories/mongo/connection/db.server';
 
@@ -42,8 +43,7 @@ const server = async () => {
 
   await dbconnect();
   app.listen(Port, () => {
-    // eslint-disable-next-line no-console
-    console.log(`UNICEROS server is running on http://localhost:${Port}`);
+    console.log(`unicornis server is running on http://localhost:${Port}`);
   });
 };
 
