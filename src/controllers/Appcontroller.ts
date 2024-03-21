@@ -2,9 +2,9 @@ class AppController {
   static getHome() {
     return {
       success: true,
-      message: 'Uniceros API is online, welcome!',
+      message: 'Unicornis API is online, welcome!',
       data: {
-        name: 'Uniceros',
+        name: 'Unicornis API',
         purpose: 'Manage your Unicorns',
         API: 'REST',
         version: '1.0.0',

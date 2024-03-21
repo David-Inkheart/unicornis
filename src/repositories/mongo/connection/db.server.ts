@@ -11,7 +11,7 @@ const dbconnect = async () => {
     if (process.env.NODE_ENV === 'development') {
       mongoose.set('debug', true);
     }
-    logger.info(`Connected to Database: ${mongoose.connection.name} 🚀`);
+    logger.info(`Connected to Database => ${mongoose.connection.name}:${mongoose.connection.port} 🚀`);
   } catch (error) {
     logger.error(`Error connecting to Database: ${error} 💥`);
   }
