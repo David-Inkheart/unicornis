@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
-
-import AppController from '../../controllers/Appcontroller';
+import { INTERNAL_SERVER_ERROR } from '../../utils/constants/error';
+import AppController from '../../controllers/AppController';
 
 export const getHomeHandler: RequestHandler = async (_, res) => {
   try {
@@ -14,7 +14,7 @@ export const getHomeHandler: RequestHandler = async (_, res) => {
   } catch (error: any) {
     return res.status(500).json({
       success: false,
-      error: 'Internal server error',
+      error: INTERNAL_SERVER_ERROR.message,
     });
   }
 };

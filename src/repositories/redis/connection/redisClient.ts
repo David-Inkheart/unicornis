@@ -13,12 +13,12 @@ const redisClient = createClient({
 
 redisClient.on('connect', () => {
   // eslint-disable-next-line no-console
-  console.log('Redis client connected');
+  console.log('Redis client connected 🚀');
 });
 
 redisClient.on('error', (err: Error) => {
   // eslint-disable-next-line no-console
-  console.log(`Something went wrong ${err}`);
+  console.log(`Something went wrong with Redis. ${err} 💥`);
 });
 
 (async () => {
