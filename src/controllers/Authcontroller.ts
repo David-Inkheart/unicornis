@@ -2,6 +2,8 @@ import jwt from 'jsonwebtoken';
 import { hashPassword, comparePasswords } from '../utils/passwordService';
 import { registerSchema, loginSchema } from '../utils/validators';
 import { createUser, findUser } from '../repositories/mongo/operations/db.user';
+import { EMAIL_PASSWORD_INCORRECT_ERROR, USER_ALREADY_EXISTS_ERROR } from '../utils/constants/error';
+import { LOGIN_SUCCESS, REGISTER_SUCCESS } from '../utils/constants/message';
 
 class AuthController {
   static async register({
@@ -19,26 +21,22 @@ class AuthController {
   }) {
     // validate user input
     const { error } = registerSchema.validate({ firstName, lastName, phoneNumber, email, password });
-
     if (error) {
       return {
         success: false,
         error: error.message,
       };
     }
-    // check if user is already existing email or username
-    const existingUser = await findUser({ email });
 
+    const existingUser = await findUser({ email });
     if (existingUser) {
       return {
         success: false,
-        error: 'User with same email or names already exists',
+        error: USER_ALREADY_EXISTS_ERROR.message,
       };
     }
-    // hash the password
-    const hashedPassword = await hashPassword(password);
 
-    // create user and account
+    const hashedPassword = await hashPassword(password);
     const newUser = await createUser({
       firstName,
       lastName,
@@ -49,12 +47,12 @@ class AuthController {
 
     // generate jwt Token
     const token = jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET!, {
-      expiresIn: '1h',
+      expiresIn: '24h',
     });
 
     return {
       success: true,
-      message: 'User registered successfully',
+      message: REGISTER_SUCCESS,
       token,
     };
   }
@@ -62,40 +60,36 @@ class AuthController {
   static async login({ email, password }: { email: string; password: string }) {
     // validate user input
     const { error } = loginSchema.validate({ email, password });
-
     if (error) {
       return {
         success: false,
         error: error.message,
       };
     }
-    // Find the user by email
-    const user = await findUser({ email });
 
+    const user = await findUser({ email });
     if (!user) {
       return {
         success: false,
-        error: 'Email/password mismatch',
+        error: EMAIL_PASSWORD_INCORRECT_ERROR.message,
       };
     }
 
-    // Compare the password
     const isMatch = await comparePasswords(password, user.password);
-
     if (!isMatch) {
       return {
         success: false,
-        error: 'Email/password mismatch',
+        error: EMAIL_PASSWORD_INCORRECT_ERROR.message,
       };
     }
-    // Generate JWT token that expires in 1 hour
+    // Generate JWT token
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
-      expiresIn: '1h',
+      expiresIn: '24h',
     });
 
     return {
       success: true,
-      message: 'User logged in successfully',
+      message: LOGIN_SUCCESS,
       token,
     };
   }
