@@ -1,4 +1,4 @@
-import AppController from '../AppController';
+import AppController from '../Appcontroller';
 
 describe('AppController', () => {
   describe('getHome', () => {

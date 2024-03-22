@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 import { INTERNAL_SERVER_ERROR } from '../../utils/constants/error';
-import AppController from '../../controllers/AppController';
+import AppController from '../../controllers/Appcontroller';
 
 export const getHomeHandler: RequestHandler = async (_, res) => {
   try {
