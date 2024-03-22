@@ -8,7 +8,7 @@ class AppController {
         purpose: 'Manage your Unicorns',
         API: 'REST',
         version: '1.0.0',
-        API_docs: 'coming soon',
+        API_docs: 'https://documenter.getpostman.com/view/27102918/2sA35Ba47e',
       },
     };
   }
