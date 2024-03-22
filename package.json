@@ -1,21 +1,20 @@
 {
   "name": "unicornis",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "engines": {
-    "node": "20.10.0",
-    "npm": "10.2.3"
-  },
+  "description": "manage your unicorns",
+  "main": "server.js",
   "scripts": {
     "start": "node dist/server.js",
     "dev": "node dist/server.js",
     "test": "jest --runInBand --detectOpenHandles --forceExit --testTimeout=90000",
     "compile": "npx tsc",
-    "watch": "npx tsc -w"
+    "watch": "npx tsc -w",
+    "build": "npm run compile",
+    "heroku-prebuild": "export NPM_CONFIG_PRODUCTION=false; export NODE_ENV=; NPM_CONFIG_PRODUCTION=false NODE_ENV=development npm install --only=dev --dev",
+    "heroku-postbuild": "export NPM_CONFIG_PRODUCTION=true; export NODE_ENV=production;"
   },
   "keywords": [],
-  "author": "",
+  "author": "David Okolie",
   "license": "ISC",
   "devDependencies": {
     "@jest/globals": "^29.5.0",
