@@ -4,7 +4,7 @@ import { hashPassword, comparePasswords } from '../../utils/passwordService';
 import { registerSchema, loginSchema } from '../../utils/validators';
 import { createUser, findUser, findUserbyId } from '../../repositories/mongo/operations/db.user';
 
-import AuthController from '../AuthController';
+import AuthController from '../Authcontroller';
 import { EMAIL_PASSWORD_INCORRECT_ERROR, USER_ALREADY_EXISTS_ERROR } from '../../utils/constants/error';
 import { LOGIN_SUCCESS, REGISTER_SUCCESS } from '../../utils/constants/message';
 

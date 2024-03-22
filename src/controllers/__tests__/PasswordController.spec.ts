@@ -4,7 +4,7 @@ import { getResetToken, storeResetToken } from '../../repositories/redis/access/
 import { hashPassword, comparePasswords } from '../../utils/passwordService';
 import { changePasswordSchema, forgotPasswordSchema, resetPasswordSchema } from '../../utils/validators';
 
-import PasswordController from '../PasswordController';
+import PasswordController from '../Passwordcontroller';
 import {
   COULD_NOT_CACHE_ERROR,
   COULD_NOT_CHANGE_PASSWORD_ERROR,

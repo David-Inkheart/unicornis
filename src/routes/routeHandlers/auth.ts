@@ -1,8 +1,8 @@
 import { RequestHandler } from 'express';
 
 import { UserId } from '../../types/custom';
-import AuthController from '../../controllers/AuthController';
-import PasswordController from '../../controllers/PasswordController';
+import AuthController from '../../controllers/Authcontroller';
+import PasswordController from '../../controllers/Passwordcontroller';
 import logger from '../../utils/winston';
 import {
   BAD_REQUEST_ERROR,
