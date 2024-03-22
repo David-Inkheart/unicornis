@@ -9,7 +9,7 @@ import logger from './utils/winston';
 
 const server = async () => {
   const app = express();
-  const Port = process.env.APP_PORT || 3000;
+  const Port = process.env.PORT || 3000;
   const url = process.env.APP_URL || `http://localhost:${Port}`;
 
   // middlewares
