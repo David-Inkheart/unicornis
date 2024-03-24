@@ -13,7 +13,7 @@ export const getStockLogList = () => {
   return StockLog.find();
 };
 
-export const createStockLog = (data: mongoose.FilterQuery<any>) => {
+export const createStockLog = async (data: mongoose.FilterQuery<any>) => {
   const stocklog = new StockLog(data);
   return stocklog.save();
 };

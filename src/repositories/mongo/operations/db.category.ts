@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { Category } from '../../../models/Category';
+import { options } from '../../../utils/constants/random';
 
 export const findCategory = (data: mongoose.FilterQuery<any>) => {
   return Category.findOne(data);
@@ -15,7 +16,9 @@ export const findCategoryById = (id: string) => {
 
 // paginated category list
 export const getCategoryList = ({ page, limit }: { page: number; limit: number }) => {
-  return Category.paginate({}, { page, limit });
+  options.page = page;
+  options.limit = limit;
+  return Category.paginate({}, options);
 };
 
 export const createCategory = (data: mongoose.FilterQuery<any>) => {

@@ -53,8 +53,8 @@ const updateCategorySchema = joi
 
 const listCategorySchema = joi
   .object({
-    page: joi.number().integer().min(1).required(),
-    limit: joi.number().integer().min(1).required(),
+    page: joi.number().integer().min(1),
+    limit: joi.number().integer().min(1),
   })
   .with('page', 'limit');
 
@@ -71,10 +71,43 @@ const createProductSchema = joi.object({
 
 const listProductSchema = joi
   .object({
-    page: joi.number().integer().min(1).required(),
-    limit: joi.number().integer().min(1).required(),
+    page: joi.number().integer().min(1),
+    limit: joi.number().integer().min(1),
+    minPrice: joi.number().min(0),
+    maxPrice: joi.number().min(0),
+    categoryId: joi.string().length(24).messages({
+      'string.length': 'Invalid category id',
+    }),
   })
   .with('page', 'limit');
+
+const updateProductSchema = joi
+  .object({
+    id: joi.string().length(24).required().messages({
+      'string.length': 'Invalid product id',
+    }),
+    name: joi.string().min(3).max(100).trim(),
+    description: joi.string().max(255).trim(),
+    price: joi.number().min(0),
+    image: joi.string().uri(),
+    category: joi.string().length(24).messages({
+      'string.length': 'Invalid category id',
+    }),
+  })
+  .or('name', 'description', 'price', 'image', 'category');
+
+const outOfStockSchema = joi.object({
+  page: joi.number().integer().min(1),
+  limit: joi.number().integer().min(1),
+  quantity: joi.number().valid(0),
+});
+
+const restockSchema = joi.object({
+  id: joi.string().length(24).required().messages({
+    'string.length': 'Invalid product id',
+  }),
+  quantity: joi.number().min(1).required(),
+});
 
 export {
   loginSchema,
@@ -88,4 +121,7 @@ export {
   updateCategorySchema,
   createProductSchema,
   listProductSchema,
+  updateProductSchema,
+  outOfStockSchema,
+  restockSchema,
 };

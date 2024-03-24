@@ -88,6 +88,11 @@ const CATEGORY_NOT_FOUND_ERROR = {
   message: 'Category not found',
 };
 
+const PRODUCT_NOT_FOUND_ERROR = {
+  code: 404,
+  message: 'Product not found',
+};
+
 const OBJECTID_CAST_ERROR = {
   code: 400,
   message: 'Invalid ObjectId',
@@ -122,4 +127,5 @@ export {
   OBJECTID_CAST_ERROR,
   INVALID_OBJECTID_ERROR,
   PRODUCT_ALREADY_EXISTS_ERROR,
+  PRODUCT_NOT_FOUND_ERROR,
 };
