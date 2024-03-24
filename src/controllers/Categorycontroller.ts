@@ -8,7 +8,7 @@ import {
   deleteCategoryById,
 } from '../repositories/mongo/operations/db.category';
 import { CATEGORY_ALREADY_EXISTS_ERROR, CATEGORY_NOT_FOUND_ERROR } from '../utils/constants/error';
-import { CREATE_SUCCESS, DELETE_SUCCESS, FETCH_SUCCESS } from '../utils/constants/message';
+import { CREATE_SUCCESS, DELETE_SUCCESS, FETCH_SUCCESS, UPDATE_SUCCESS } from '../utils/constants/message';
 
 class CategoryController {
   static async makeCategory({ name, description }: { name: string; description: string | undefined }) {
@@ -90,7 +90,7 @@ class CategoryController {
     };
   }
 
-  static async editCategory(id: string, { name, description }: { name: string; description: string | undefined }) {
+  static async editCategory(id: string, { name, description }: { name: string; description?: string }) {
     const { error } = updateCategorySchema.validate({ id, name, description });
     if (error) {
       return {
@@ -111,7 +111,7 @@ class CategoryController {
 
     return {
       success: true,
-      message: CREATE_SUCCESS,
+      message: UPDATE_SUCCESS,
       data: updatedCategory,
     };
   }

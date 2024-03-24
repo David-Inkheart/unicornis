@@ -4,6 +4,7 @@ import mongoosePaginate from 'mongoose-paginate-v2';
 export interface ICategory extends Document {
   name: string;
   description: string;
+  products: string[];
   // active: boolean;
   // deletedAt: Date | null;
 }

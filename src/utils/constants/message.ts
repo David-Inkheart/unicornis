@@ -1,6 +1,7 @@
 const FETCH_SUCCESS = 'Resource fetched successfully';
 const CREATE_SUCCESS = 'Resource created successfully';
 const UPDATE_SUCCESS = 'Resource updated successfully';
+const RESTOCK_SUCCESS = 'Product restocked successfully';
 const DELETE_SUCCESS = 'Resource deleted successfully';
 const REGISTER_SUCCESS = 'User registered successfully';
 const LOGIN_SUCCESS = 'Login successful';
@@ -18,4 +19,5 @@ export {
   PASSWORD_CHANGED_SUCCESS,
   TOKEN_SENT_SUCCESS,
   PASSWORD_RESET_SUCCESS,
+  RESTOCK_SUCCESS,
 };
