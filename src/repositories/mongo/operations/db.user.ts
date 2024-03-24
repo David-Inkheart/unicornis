@@ -10,7 +10,6 @@ export const findUserbyId = (id: UserId) => {
   return User.findById(id);
 };
 
-// create user with an account
 export const createUser = (data: mongoose.FilterQuery<any>) => {
   const user = new User(data);
   return user.save();

@@ -6,7 +6,6 @@ export interface IUser {
   phoneNumber: string;
   email: string;
   password: string;
-  createdAt: Date;
 }
 
 const userSchema = new Schema<IUser>(
@@ -35,13 +34,8 @@ const userSchema = new Schema<IUser>(
       type: String,
       required: true,
     },
-
-    createdAt: {
-      type: Date,
-      default: new Date(),
-    },
   },
-  // { timestamps: true },
+  { timestamps: true },
 );
 
 export const User = model<IUser>('User', userSchema);

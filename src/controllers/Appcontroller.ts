@@ -1,3 +1,6 @@
+/**
+ * This AppController class contains a static method getHome that is useful for testing if the API is online.
+ */
 class AppController {
   static getHome() {
     return {

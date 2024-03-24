@@ -13,7 +13,9 @@ const loginSchema = joi.object({
   password: joi.string().min(8).trim().required(),
 });
 
-const idSchema = joi.number().integer().min(1).required();
+const idSchema = joi.string().length(24).required().messages({
+  'string.length': 'Invalid id',
+});
 
 const changePasswordSchema = joi.object({
   currentPassword: joi.string().min(8).required(),
@@ -36,4 +38,54 @@ const resetPasswordSchema = joi.object({
   code: joi.string().required().length(5),
 });
 
-export { loginSchema, registerSchema, changePasswordSchema, idSchema, forgotPasswordSchema, resetPasswordSchema };
+const categorySchema = joi.object({
+  name: joi.string().min(3).max(100).trim().required(),
+  description: joi.string().max(255).trim(),
+});
+
+const updateCategorySchema = joi
+  .object({
+    id: joi.string().length(24).required(),
+    name: joi.string().min(3).max(100).trim(),
+    description: joi.string().max(255).trim(),
+  })
+  .or('name', 'description');
+
+const listCategorySchema = joi
+  .object({
+    page: joi.number().integer().min(1).required(),
+    limit: joi.number().integer().min(1).required(),
+  })
+  .with('page', 'limit');
+
+const createProductSchema = joi.object({
+  name: joi.string().min(3).max(100).trim().required(),
+  description: joi.string().max(255).trim(),
+  price: joi.number().min(0).required(),
+  quantity: joi.number().min(0),
+  category: joi.string().length(24).required().messages({
+    'string.length': 'Invalid category id',
+  }),
+  image: joi.string().uri(),
+});
+
+const listProductSchema = joi
+  .object({
+    page: joi.number().integer().min(1).required(),
+    limit: joi.number().integer().min(1).required(),
+  })
+  .with('page', 'limit');
+
+export {
+  loginSchema,
+  registerSchema,
+  changePasswordSchema,
+  idSchema,
+  forgotPasswordSchema,
+  resetPasswordSchema,
+  categorySchema,
+  listCategorySchema,
+  updateCategorySchema,
+  createProductSchema,
+  listProductSchema,
+};
