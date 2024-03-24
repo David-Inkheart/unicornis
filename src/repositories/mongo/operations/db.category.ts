@@ -13,8 +13,9 @@ export const findCategoryById = (id: string) => {
 //   return Category.find({ active: true }).populate('products');
 // };
 
-export const getCategoryList = () => {
-  return Category.find().populate('products');
+// paginated category list
+export const getCategoryList = ({ page, limit }: { page: number; limit: number }) => {
+  return Category.paginate({}, { page, limit });
 };
 
 export const createCategory = (data: mongoose.FilterQuery<any>) => {

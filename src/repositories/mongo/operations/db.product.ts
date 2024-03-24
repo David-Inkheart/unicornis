@@ -13,8 +13,9 @@ export const findProductById = (id: string) => {
 //   return Product.find({ active: true });
 // };
 
-export const getProductList = () => {
-  return Product.find();
+// paginated product list, add other filters if needed
+export const getProductList = ({ page, limit }: { page: number; limit: number }) => {
+  return Product.paginate({}, { page, limit });
 };
 
 export const createProduct = (data: mongoose.FilterQuery<any>) => {

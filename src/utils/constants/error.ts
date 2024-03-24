@@ -78,6 +78,28 @@ const INVALID_EXPIRED_TOKEN_ERROR = {
   message: 'The code is invalid or has expired',
 };
 
+const CATEGORY_ALREADY_EXISTS_ERROR = {
+  code: 409,
+  message: 'Category already exists',
+};
+
+const CATEGORY_NOT_FOUND_ERROR = {
+  code: 404,
+  message: 'Category not found',
+};
+
+const OBJECTID_CAST_ERROR = {
+  code: 400,
+  message: 'Invalid ObjectId',
+};
+
+const PRODUCT_ALREADY_EXISTS_ERROR = {
+  code: 409,
+  message: 'Product already exists',
+};
+
+const INVALID_OBJECTID_ERROR = 'Cast to ObjectId failed';
+
 export {
   BAD_REQUEST_ERROR,
   UNAUTHORIZED_ERROR,
@@ -95,4 +117,9 @@ export {
   COULD_NOT_CACHE_ERROR,
   NEW_OLD_PASSWORD_SAME_ERROR,
   INVALID_EXPIRED_TOKEN_ERROR,
+  CATEGORY_ALREADY_EXISTS_ERROR,
+  CATEGORY_NOT_FOUND_ERROR,
+  OBJECTID_CAST_ERROR,
+  INVALID_OBJECTID_ERROR,
+  PRODUCT_ALREADY_EXISTS_ERROR,
 };
