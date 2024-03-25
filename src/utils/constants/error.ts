@@ -103,6 +103,16 @@ const PRODUCT_ALREADY_EXISTS_ERROR = {
   message: 'Product already exists',
 };
 
+const PRODUCT_OUT_OF_STOCK_ERROR = {
+  code: 400,
+  message: 'Product is out of stock',
+};
+
+const PRODUCT_NOT_ENOUGH_STOCK_ERROR = {
+  code: 400,
+  message: 'Product does not have enough stock',
+};
+
 const INVALID_OBJECTID_ERROR = 'Cast to ObjectId failed';
 
 export {
@@ -128,4 +138,6 @@ export {
   INVALID_OBJECTID_ERROR,
   PRODUCT_ALREADY_EXISTS_ERROR,
   PRODUCT_NOT_FOUND_ERROR,
+  PRODUCT_OUT_OF_STOCK_ERROR,
+  PRODUCT_NOT_ENOUGH_STOCK_ERROR,
 };

@@ -5,12 +5,20 @@ import {
   findProduct,
   findProductById,
   getProductList,
+  purchaseProductSession,
   restockProductSession,
   updateProduct,
 } from '../repositories/mongo/operations/db.product';
 import { CATEGORY_NOT_FOUND_ERROR, PRODUCT_ALREADY_EXISTS_ERROR, PRODUCT_NOT_FOUND_ERROR } from '../utils/constants/error';
 import { CREATE_SUCCESS, DELETE_SUCCESS, FETCH_SUCCESS, UPDATE_SUCCESS } from '../utils/constants/message';
-import { createProductSchema, idSchema, listProductSchema, outOfStockSchema, restockSchema, updateProductSchema } from '../utils/validators';
+import {
+  createProductSchema,
+  idSchema,
+  listProductSchema,
+  outOfStockSchema,
+  restockOrPurchaseSchema,
+  updateProductSchema,
+} from '../utils/validators';
 
 class ProductController {
   static async makeProduct({
@@ -252,8 +260,8 @@ class ProductController {
     };
   }
 
-  static async restockProduct({ id, quantity }: { id: string; quantity: number }) {
-    const { error } = restockSchema.validate({ id, quantity });
+  static async restockProduct({ userId, id, quantity }: { userId: string; id: string; quantity: number }) {
+    const { error } = restockOrPurchaseSchema.validate({ userId, id, quantity });
     if (error) {
       return {
         success: false,
@@ -261,9 +269,23 @@ class ProductController {
       };
     }
 
-    const restockedProduct = await restockProductSession({ id, quantity });
+    const restockedProduct = await restockProductSession({ userId, id, quantity });
 
     return restockedProduct;
+  }
+
+  static async productPurchase({ userId, id, quantity }: { userId: string; id: string; quantity: number }) {
+    const { error } = restockOrPurchaseSchema.validate({ userId, id, quantity });
+    if (error) {
+      return {
+        success: false,
+        error: error.message,
+      };
+    }
+
+    const purchasedProduct = await purchaseProductSession({ userId, id, quantity });
+
+    return purchasedProduct;
   }
 }
 

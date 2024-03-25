@@ -5,6 +5,7 @@ import {
   getProductByIdHandler,
   getProductListHandler,
   outOfStockHandler,
+  productPurchaseHandler,
   removeProductHandler,
   restockProductHandler,
 } from './routeHandlers/product';
@@ -21,5 +22,6 @@ productRouter.get('/:id', getProductByIdHandler);
 productRouter.delete('/:id', removeProductHandler);
 productRouter.patch('/:id/update', editProductHandler);
 productRouter.patch('/:id/restock', restockProductHandler);
+productRouter.post('/:id/purchase', productPurchaseHandler);
 
 export default productRouter;

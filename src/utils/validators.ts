@@ -3,7 +3,7 @@ import joi from 'joi';
 const registerSchema = joi.object({
   firstName: joi.string().min(3).max(20).trim().alphanum().required(),
   lastName: joi.string().min(3).max(20).trim().alphanum().required(),
-  phoneNumber: joi.string().min(10).max(15).trim().required(),
+  phoneNumber: joi.string().min(11).max(15).trim().required(),
   email: joi.string().email().trim().lowercase().required(),
   password: joi.string().min(8).trim().required(),
 });
@@ -81,6 +81,19 @@ const listProductSchema = joi
   })
   .with('page', 'limit');
 
+const inventoryListSchema = joi
+  .object({
+    page: joi.number().integer().min(1),
+    limit: joi.number().integer().min(1),
+    productId: joi.string().length(24).messages({
+      'string.length': 'Invalid product id',
+    }),
+    transactionType: joi.string().valid('restocked', 'sold'),
+    from: joi.date().iso(),
+    to: joi.date().iso(),
+  })
+  .with('page', 'limit');
+
 const updateProductSchema = joi
   .object({
     id: joi.string().length(24).required().messages({
@@ -102,7 +115,8 @@ const outOfStockSchema = joi.object({
   quantity: joi.number().valid(0),
 });
 
-const restockSchema = joi.object({
+const restockOrPurchaseSchema = joi.object({
+  userId: joi.string().length(24).required(),
   id: joi.string().length(24).required().messages({
     'string.length': 'Invalid product id',
   }),
@@ -123,5 +137,6 @@ export {
   listProductSchema,
   updateProductSchema,
   outOfStockSchema,
-  restockSchema,
+  restockOrPurchaseSchema,
+  inventoryListSchema,
 };
