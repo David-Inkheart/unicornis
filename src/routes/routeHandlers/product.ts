@@ -7,7 +7,9 @@ import {
   CATEGORY_NOT_FOUND_ERROR,
   INTERNAL_SERVER_ERROR,
   INVALID_OBJECTID_ERROR,
+  PRODUCT_NOT_ENOUGH_STOCK_ERROR,
   PRODUCT_NOT_FOUND_ERROR,
+  PRODUCT_OUT_OF_STOCK_ERROR,
 } from '../../utils/constants/error';
 
 export const createProductHandler: RequestHandler = async (req, res) => {
@@ -260,13 +262,67 @@ export const outOfStockHandler: RequestHandler = async (req, res) => {
 export const restockProductHandler: RequestHandler = async (req, res) => {
   try {
     const { id } = req.params;
+    const { userId } = req as { userId: string };
     const { quantity } = req.body as { quantity: number };
 
-    const response = await ProductController.restockProduct({ id, quantity });
+    const response = await ProductController.restockProduct({ userId, id, quantity });
 
     if (!response.success) {
       if (response.error === PRODUCT_NOT_FOUND_ERROR.message) {
         return res.status(PRODUCT_NOT_FOUND_ERROR.code).json({
+          success: false,
+          error: response.error,
+        });
+      }
+      return res.status(BAD_REQUEST_ERROR.code).json({
+        success: false,
+        error: response.error,
+      });
+    }
+
+    return res.json({
+      success: response.success,
+      message: response.message,
+      data: response.data,
+    });
+  } catch (err: any) {
+    logger.error(err.message);
+    if (err.message.includes(INVALID_OBJECTID_ERROR)) {
+      return res.status(BAD_REQUEST_ERROR.code).json({
+        success: false,
+        error: BAD_REQUEST_ERROR.message,
+      });
+    }
+    return res.status(INTERNAL_SERVER_ERROR.code).json({
+      success: false,
+      error: INTERNAL_SERVER_ERROR.message,
+    });
+  }
+};
+
+export const productPurchaseHandler: RequestHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { userId } = req as { userId: string };
+    const { quantity } = req.body as { quantity: number };
+
+    const response = await ProductController.productPurchase({ userId, id, quantity });
+
+    if (!response.success) {
+      if (response.error === PRODUCT_NOT_FOUND_ERROR.message) {
+        return res.status(PRODUCT_NOT_FOUND_ERROR.code).json({
+          success: false,
+          error: response.error,
+        });
+      }
+      if (response.error === PRODUCT_OUT_OF_STOCK_ERROR.message) {
+        return res.status(PRODUCT_OUT_OF_STOCK_ERROR.code).json({
+          success: false,
+          error: response.error,
+        });
+      }
+      if (response.error === PRODUCT_NOT_ENOUGH_STOCK_ERROR.message) {
+        return res.status(PRODUCT_NOT_ENOUGH_STOCK_ERROR.code).json({
           success: false,
           error: response.error,
         });

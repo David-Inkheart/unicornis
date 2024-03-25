@@ -2,6 +2,7 @@ const FETCH_SUCCESS = 'Resource fetched successfully';
 const CREATE_SUCCESS = 'Resource created successfully';
 const UPDATE_SUCCESS = 'Resource updated successfully';
 const RESTOCK_SUCCESS = 'Product restocked successfully';
+const PURCHASE_SUCCESS = 'Product purchased successfully';
 const DELETE_SUCCESS = 'Resource deleted successfully';
 const REGISTER_SUCCESS = 'User registered successfully';
 const LOGIN_SUCCESS = 'Login successful';
@@ -20,4 +21,5 @@ export {
   TOKEN_SENT_SUCCESS,
   PASSWORD_RESET_SUCCESS,
   RESTOCK_SUCCESS,
+  PURCHASE_SUCCESS,
 };
