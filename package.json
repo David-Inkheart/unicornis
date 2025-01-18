@@ -50,7 +50,7 @@
     "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^6.1.0",
-    "mongoose": "^7.6.3",
+    "mongoose": "^7.8.4",
     "mongoose-paginate-v2": "^1.8.0",
     "redis": "^4.6.7",
     "redis-mock": "^0.56.3",
